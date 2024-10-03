@@ -4,7 +4,7 @@ I = imread([path1,file1]);
 %% If noisy run this section:
 II = adapthisteq(I);
 figure; imshow(II)
-thrsh=2; %Use values between (2-3) for noisy image 
+thrsh=2; %Use values between (2.2-3) for noisy image 
 inx=II<thrsh*mean2(II);
 II(inx)=0; figure;imshow(II)
 %% Binarize:
@@ -12,8 +12,7 @@ BW = imbinarize(II, 'adaptive', 'Sensitivity', 0.00000, 'ForegroundPolarity', 'b
 figure; imshow(BW)
 %% Watershed
 fudgeFactor = 1; %Higher fudgefactor includes only stronger signals. 0 everything even lower signals or noise
-%maxin = 20; %Use smaller maxin (4-10) for smaller cells or lower zoom with lots of cells
-maxin = 16;
+maxin = 16;%Use smaller maxin (4-10) for smaller cells or lower zoom with lots of cells
 Iseg = V2_allcellseg(BW,fudgeFactor,maxin);
 figure;imshowpair(Iseg,I,'montage')
 %% Edges
